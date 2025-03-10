@@ -19,7 +19,7 @@ export default {
 
       loading.value = true;
       try {
-        const response = await fetch("http://127.0.0.1:8000/recipes", {
+        const response = await fetch(import.meta.env.VITE_API_BASE_URL+"/recipes", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

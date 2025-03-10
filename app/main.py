@@ -4,7 +4,7 @@ from db.database import recipes_collection
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.requests import Request
-
+# from auth.autentification import auth_router
 
 app = FastAPI()
 templates = Jinja2Templates(directory="frontend")
@@ -16,7 +16,7 @@ async def read_root(request: Request):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Adjust this in production (e.g., ["http://localhost:5173"])
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],  # Allow all HTTP methods
     allow_headers=["*"],  # Allow all headers
@@ -42,4 +42,6 @@ async def get_all_recipes():
         recipe["_id"] = str(recipe["_id"])  # Convert MongoDB ObjectId to string
         recipe["ingredients"] = list(recipe["ingredients"])
     return {"recipes": recipes}
+
+# app.include_router(auth_router,prefix="/auth")
 

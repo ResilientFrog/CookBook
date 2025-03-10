@@ -24,7 +24,7 @@ export default {
     const removeIngredient = (index) => {
       recipe.value.ingredients.splice(index, 1);
     };
-
+     
     const submitRecipe = async () => {
       if (!recipe.value.name || !recipe.value.description || !recipe.value.ingredients.length) {
         alert('Please fill in all required fields before submitting.');
@@ -32,20 +32,20 @@ export default {
       }
 
       try {
-        const response = await fetch('../../src/server/api/createRecipe', { 
+        const response = await fetch(import.meta.env.VITE_API_BASE_URL+"/create_recipe", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
+            
             body: JSON.stringify(recipe.value),
-        });
-
-        if (response.status === 'success') {
-          message.value = response.message;
-          alert(message.value);
+        });       
+        if (response.status == 200) {
+          message.value = response.statusText;
+          alert(message.value );
           resetForm();
         } else {
-          message.value = response.message;
+          message.value = response.statusText;
           alert(message.value);
         }
       } catch (error) {
