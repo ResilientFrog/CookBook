@@ -3,11 +3,12 @@ export default {
   props: {
     recipe: Object, // Receives the selected recipe
   },
+  emits: ["close"],
 };
 </script>
 
 <template>
-  <div class="modal-overlay">
+  <div class="modal-overlay" @click.self="$emit('close')">
     <div class="modal-content">
       <h2>{{ recipe.name }}</h2>
       <p><strong>Ingredients:</strong></p>
@@ -23,7 +24,20 @@ export default {
 </template>
 
 <style scoped>
+
 .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark semi-transparent overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*pop up window*/
+.modal-content {
   position: fixed;
   top: 50%;
   left: 50%;

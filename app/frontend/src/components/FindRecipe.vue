@@ -29,7 +29,9 @@ export default {
         if (!response.ok) throw new Error("Error retrieving recipes!");
 
         const data = await response.json();
+        
         searchResults.value = data.recipes.filter((recipe) =>
+          //console.log(recipe)
           recipe.name.toLowerCase().includes(searchQuery.value.toLowerCase())
         );
 
